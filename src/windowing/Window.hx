@@ -3,7 +3,9 @@ package windowing;
 import openfl.display.Sprite;
 import windowing.events.WindowEvent;
 import windowing.layout.ContainerWithLayout;
+import windowing.layout.FreeLayout;
 import windowing.layout.HorizontalLayout;
+import windowing.layout.VerticalLayout;
 
 /**
  * ...
@@ -46,8 +48,7 @@ class Window extends Sprite
 		this.addChild(titleBar);
 		
 		// Create content container
-		var layout = new HorizontalLayout();
-		content = new ContainerWithLayout(layout);
+		content = new ContainerWithLayout(new VerticalLayout());
 		content.x = 0;
 		content.y = titleBar.titlebarHeight;
 		this.addChild(content);
