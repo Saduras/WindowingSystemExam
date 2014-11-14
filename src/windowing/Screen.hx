@@ -1,0 +1,144 @@
+package windowing;
+
+import openfl.display.Stage;
+import openfl.events.Event;
+import openfl.display.DisplayObjectContainer;
+import openfl.display.Sprite;
+import openfl.utils.Dictionary;
+import windowing.events.WindowEvent;
+
+/**
+ * The screen class is the container for the windowing system. 
+ * All windows are created as a child of a screen. 
+ * This class also handles the minized window bar.
+ * @author David Speck
+ */
+class Screen extends Sprite
+{
+	var windowList : List<Window>;
+	var activeWindow : Window;
+	
+	// List of windows currently minimized
+	var minimizedList : List<Window>;
+	// Original position of minimized windows
+	var orgPos : Map<Window, Array<Float>>;
+	
+	// Width of the screen
+	var screenWidth : Float;
+	// Height of the screen
+	var screenHeight : Float;
+
+	public function new(width : Float, height : Float) 
+	{
+		super();
+		
+		windowList = new List<Window>();
+		minimizedList = new List<Window>();
+		orgPos = new Map<Window, Array<Float>>();
+		
+		screenWidth = width;
+		screenHeight = height;
+	}
+
+	// Create a new window and add it to the screen.
+	public function createWindow(title : String) : Window
+	{
+		var window = new Window(title, 300, 200);
+		// Connect events
+		window.addEventListener(WindowEvent.ACTIVATED, onWindowActivated);
+		window.addEventListener(WindowEvent.CLOSED, onWindowClosed);
+		window.addEventListener(WindowEvent.MINIMIZED, onWindowMinimized);
+		window.addEventListener(WindowEvent.SIZE_RESTORED, onWindowSizeResotred);
+		
+		windowList.add(window);	
+		this.addChild(window);
+		
+		window.draw();
+		
+		return window;
+	}
+	
+	//{ Event handler
+	
+	// Bring the active window to the front 
+	// and deactivate the prior active window.
+	private function onWindowActivated(e : Event) : Void 
+	{
+		var we : WindowEvent = cast(e, WindowEvent);
+		
+		if (activeWindow != we.source) {
+			// deactive prior active window
+			if (activeWindow != null) {
+				activeWindow.deactivate();
+			}
+			
+			// bring the activated window to the front
+			this.setChildIndex(we.source, this.numChildren - 1);
+		}
+		activeWindow = we.source;
+	}
+	
+	// Remove closed window.
+	private function onWindowClosed(e : Event) : Void
+	{
+		var we : WindowEvent = cast(e, WindowEvent);
+		
+		if (activeWindow == we.source) {
+			activeWindow = null;
+		}
+		
+		windowList.remove(we.source);
+		
+		// Remove event listener on closed window
+		we.source.removeEventListener(WindowEvent.ACTIVATED, onWindowActivated);
+		we.source.removeEventListener(WindowEvent.CLOSED, onWindowClosed);
+		we.source.removeEventListener(WindowEvent.MINIMIZED, onWindowMinimized);
+		we.source.removeEventListener(WindowEvent.SIZE_RESTORED, onWindowSizeResotred);
+	}
+	
+	// Add window to minimized list and save orginal position.
+	private function onWindowMinimized(e : Event) : Void
+	{
+		var window : Window = cast(e, WindowEvent).source;
+		
+		minimizedList.add(window);
+		// Save postion
+		orgPos.set(window, [window.x, window.y]);
+		
+		arrangeMinimizedWindows();
+	}
+	
+	// Move window back to orginal position 
+	// and update minimized window list.
+	private function onWindowSizeResotred(e : Event) : Void
+	{
+		var window : Window = cast(e, WindowEvent).source;
+		
+		// Move back to original position
+		window.x = orgPos.get(window)[0];
+		window.y = orgPos.get(window)[1];
+		
+		// Clean up lists
+		orgPos.remove(window);
+		minimizedList.remove(window);
+		
+		arrangeMinimizedWindows();
+	}
+	//}
+	
+	//{ Helper
+	
+	// Arrange minimized windows horizontal at the bottom of the screen.
+	private function arrangeMinimizedWindows() : Void
+	{
+		var offsetX : Float = 0;
+		for (win in minimizedList) 
+		{
+			win.x = offsetX;
+			win.y = this.screenHeight - win.titleBar.titlebarHeight;
+			
+			offsetX += win.width;
+		}
+	}
+	//}
+}
