@@ -1,9 +1,12 @@
 package ;
 
+import basicUI.Button;
+import basicUI.OutputField;
 import flash.display.DisplayObjectContainer;
 import flash.display.Sprite;
 import flash.events.Event;
 import flash.Lib;
+import openfl.events.MouseEvent;
 import windowing.Window;
 import windowing.Screen;
 import basicUI.InputField;
@@ -45,23 +48,39 @@ class Main extends Sprite
 		win1.moveTo(40, 40);
 		win2.moveTo(100, 200);
 		
-		// Add some stuff
-		var addressInput = new InputField("Address:", "address", "This where its snake house is placed");
+		// Add a simple form to window one
+		var formController = new FormController();
+		var addressInput = new InputField("Address:", "address", "Physical address of the person.");
 		win1.content.addChild(addressInput);
 		addressInput.x = 20;
-		addressInput.y = 35;
+		addressInput.y = 30;
+		formController.addInputField(addressInput);
 		
-		var speedInput = new InputField("Speed:", "float", "This tells how fast the snake travels on the grid");
-		win1.content.addChild(speedInput);
-		speedInput.x = 25;
-		speedInput.y = 55;
+		var ageInput = new InputField("Age:", "number", "Age of the person in years");
+		win1.content.addChild(ageInput);
+		ageInput.x = 30;
+		ageInput.y = 80;
+		formController.addInputField(ageInput);
 		
-		var nameInput = new InputField("Name:", "text", "The most important fucking property!!! The name of the snake! Choose wisly!");
+		var nameInput = new InputField("Name:", "text", "Name of the person.");
 		win1.content.addChild(nameInput);
-		nameInput.x = 120;
-		nameInput.y = 55;
+		nameInput.x = 35;
+		nameInput.y = 130;
+		formController.addInputField(nameInput);
 		
+		var output = new OutputField(300.0, 400.0, 30.0);
+		win1.content.addChild(output);
+		output.x = 20;
+		output.y = 180;
+		formController.setOutputField(output);
 		
+		var submitButton = new Button("Submit", 120.0, 20.0);
+		win1.content.addChild(submitButton);
+		submitButton.x = 40;
+		submitButton.y = 230;
+		submitButton.addEventListener(MouseEvent.CLICK, function(e : Event) {
+			formController.submit();
+		});
 		
 		stage.addChild(screen);
 	}

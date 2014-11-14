@@ -23,7 +23,7 @@ class InputField extends Sprite
 	var inputField 	: TextField;
 	var tooltip		: Tooltip;
 	
-	var labelColor 		: Int 	= 0xffffff;
+	var labelColor 		: Int 	= 0x000000;
 	var labelWidth		: Float = 140;
 	var inputTextColor 	: Int = 0xffffff;
 	var inputWidth		: Float = 100;
