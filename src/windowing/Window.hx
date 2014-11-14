@@ -2,6 +2,8 @@ package windowing;
 
 import openfl.display.Sprite;
 import windowing.events.WindowEvent;
+import windowing.layout.ContainerWithLayout;
+import windowing.layout.HorizontalLayout;
 
 /**
  * ...
@@ -24,7 +26,7 @@ class Window extends Sprite
 	// Title bar component of this window
 	public var titleBar : TitleBar;
 	// Window content
-	public var content : Sprite;
+	public var content : ContainerWithLayout;
 	// Controller who handles event logic
 	var controller : WindowController;
 	
@@ -44,7 +46,10 @@ class Window extends Sprite
 		this.addChild(titleBar);
 		
 		// Create content container
-		content = new Sprite();
+		var layout = new HorizontalLayout();
+		content = new ContainerWithLayout(layout);
+		content.x = 0;
+		content.y = titleBar.titlebarHeight;
 		this.addChild(content);
 		
 		// Setup controller
@@ -115,8 +120,10 @@ class Window extends Sprite
 		draw();
 		
 		if (isMinimized) {
+			content.visible = false;
 			dispatchEvent(new WindowEvent(WindowEvent.MINIMIZED, this));
 		} else {
+			content.visible = true;
 			dispatchEvent(new WindowEvent(WindowEvent.SIZE_RESTORED, this));
 		}
 	}

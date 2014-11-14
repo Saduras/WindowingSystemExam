@@ -7,7 +7,7 @@ import flash.display.DisplayObjectContainer;
 
 interface ILayout 
 {
-  public var id(default, null) : String;
+  public function getId() : String;
   
   public function apply(container : DisplayObjectContainer) : Void;
 }
