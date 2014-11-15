@@ -46,14 +46,6 @@ class Main extends Sprite
 	{
 		if (inited) return;
 		inited = true;
-
-		// (your code here)
-		
-		// Stage:
-		// stage.stageWidth x stage.stageHeight @ stage.dpiScale
-		
-		// Assets:
-		// nme.Assets.getBitmapData("img/assetname.jpg");
 		
 		screen = new Screen(stage.stageWidth, stage.stageHeight);
 		stage.addChild(screen);
