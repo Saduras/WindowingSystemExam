@@ -16,9 +16,9 @@ class Window extends Sprite
 {
 	//{ Member
 	// Window width
-	public var windowWidth : Float;
+	public var windowWidth(default, null) : Float;
 	// Window height
-	public var windowHeight : Float;
+	public var windowHeight(default, null) : Float;
 	// Border thickness
 	public var borderSize : Int = 2;
 	// Color of the window border
@@ -52,7 +52,7 @@ class Window extends Sprite
 		this.addChild(titleBar);
 		
 		// Create content container
-		content = new ContainerWithLayout(layout);
+		content = new ContainerWithLayout(layout, windowWidth, windowHeight - titleBar.titlebarHeight);
 		content.x = 0;
 		content.y = titleBar.titlebarHeight;
 		this.addChild(content);
@@ -151,5 +151,19 @@ class Window extends Sprite
 			
 			dispatchEvent(new WindowEvent(WindowEvent.SIZE_RESTORED, this));
 		}
+	}
+
+	// Set window width
+	public function setWidth(width : Float) : Void
+	{
+		windowWidth = width;
+		content.containerWidth = windowWidth;
+	}
+	
+	// Set window height
+	public function setHeight(height : Float) : Void
+	{
+		windowHeight = height;
+		content.containerHeight = windowHeight - titleBar.titlebarHeight;
 	}
 }

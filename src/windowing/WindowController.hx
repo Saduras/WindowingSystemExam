@@ -90,15 +90,15 @@ class WindowController
 	{
 		// Disconnect event to stop resize process
 		windowView.removeEventListener(Event.ENTER_FRAME, onResizeMove);
-		windowView.content.updateLayout();
+		windowView.content.applyLayout();
 	}
 	
 	// Resize window by mouse delta movement.
 	private function onResizeMove(e : Event) : Void
 	{
 		// Resize window for mouse delta movement
-		windowView.windowWidth += windowView.mouseX - lastMousePos[0];
-		windowView.windowHeight += windowView.mouseY - lastMousePos[1];
+		windowView.setWidth(windowView.windowWidth + windowView.mouseX - lastMousePos[0]);
+		windowView.setHeight(windowView.windowHeight + windowView.mouseY - lastMousePos[1]);
 		
 		// Re-draw window
 		windowView.draw();
