@@ -31,11 +31,12 @@ class FormController
 	{
 		for (input in inputFields) {
 			if (!input.validate()) {
-				outputField.SetText(input.getLabel() + " is not a valid " + input.getValidationMode(), true);
+				outputField.setText(input.getLabel() + " is not a valid " + input.getValidationMode(), true);
 				return false;
 			}
 		}
 		
+		outputField.setText("Submit successfull!", false);
 		return true;
 	}
 }

@@ -13,7 +13,9 @@ import openfl.Assets;
  */
 class OutputField extends Sprite
 {
+	// Output text label.
 	var label				: TextField;
+	// Output area properties.
 	var labelWidth			: Float;
 	var backgroundWidth		: Float;
 	var backgroundHeight	: Float;
@@ -23,6 +25,7 @@ class OutputField extends Sprite
 	{
 		super();
 		
+		// Assign width & height.
 		this.labelWidth = labelWidth;
 		this.backgroundWidth = backgroundWidth;
 		this.backgroundHeight = backgroundHeight;
@@ -33,25 +36,36 @@ class OutputField extends Sprite
 		// Define the TextFormat
 		var labelFormat : TextFormat = new TextFormat();
 		labelFormat.font = font.fontName;
-		labelFormat.size = 14.0;
+		labelFormat.size = 12.0;
 		labelFormat.align = TextFormatAlign.CENTER;
 		
+		// Create text label
 		label = new TextField();
 		this.addChild(label);
+		
+		// Add text format
 		label.embedFonts = true;
 		label.defaultTextFormat = labelFormat; // Set text format before adding the text
+		
+		// Set default text
 		label.text = "output label";
+		
+		// Set size
 		label.width = labelWidth;
 		label.height = label.textHeight * 1.4;
+		
+		// Set the label not selectable
 		label.mouseEnabled = false;
 		label.selectable = false;
 		
+		// Center the text in y direction
 		label.y = (backgroundHeight - label.textHeight) / 2;
 		
-		Draw();
+		draw();
 	}
 	
-	public function Draw() : Void
+	// Draw a rectangle for the output area.
+	public function draw() : Void
 	{
 		graphics.clear();
 		graphics.beginFill(fillColor, 1.0);
@@ -59,7 +73,8 @@ class OutputField extends Sprite
 		graphics.endFill();
 	}
 	
-	public function SetText(text : String, warning : Bool) : Void
+	// Set the output text.
+	public function setText(text : String, warning : Bool) : Void
 	{
 		label.text = text;
 		if (warning) {
