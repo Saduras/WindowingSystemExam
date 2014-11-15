@@ -116,7 +116,7 @@ class Main extends Sprite
 	//{ Button handler
 	private function createHorizontalWindow(e : Event) : Void
 	{
-		var window = screen.createWindow("Window horizontal layout", new HorizontalLayout());
+		var window = screen.createWindow("Window horizontal layout", new HorizontalLayout(5));
 		window.moveTo(100.0, 100.0);
 		
 		for (i in 0...10) 
@@ -129,7 +129,7 @@ class Main extends Sprite
 	
 	private function createVerticalWindow(e : Event) : Void
 	{
-		var window = screen.createWindow("Window vertical layout", new VerticalLayout());
+		var window = screen.createWindow("Window vertical layout", new VerticalLayout(5.0));
 		window.moveTo(100.0, 100.0);
 		
 		for (i in 0...10) 
@@ -158,7 +158,7 @@ class Main extends Sprite
 	
 	private function createFormWindow(e : Event) : Void
 	{
-		var window = screen.createWindow("Form window", new VerticalLayout());
+		var window = screen.createWindow("Form window", new VerticalLayout(5.0));
 		
 		window.moveTo(40, 40);
 		

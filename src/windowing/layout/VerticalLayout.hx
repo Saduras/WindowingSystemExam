@@ -8,7 +8,12 @@ import openfl.display.Sprite;
  */
 class VerticalLayout implements ILayout
 {
-	public function new() { }
+	var elementSpacing : Float;
+	
+	public function new(spacing : Float = 5) 
+	{ 
+		elementSpacing = spacing;
+	}
 	
 	public function getId():String { return "VERTICAL"; }
 	
@@ -43,7 +48,7 @@ class VerticalLayout implements ILayout
 				var nextChild = container.getChildAt(i + 1);
 				if (i + 1 < columnChildCount[columnIndex] + columnStartIndex) {
 					// Set offsets
-					offsetY += nextChild.height;
+					offsetY += nextChild.height + elementSpacing;
 					
 					// Update max width
 					if (child.width > maxChildWidth) {
@@ -77,16 +82,16 @@ class VerticalLayout implements ILayout
 		for (i in 0...container.numChildren) {
 			var child = container.getChildAt(i);
 			// Count child to current row if row is empty or container has enough space
-			if (sumY == 0 || sumY + child.height < container.containerHeight - 2 * container.containerPaddingY) {
+			if (sumY == 0 || sumY + child.height + elementSpacing < container.containerHeight - 2 * container.containerPaddingY) {
 				columns[j]++;
 				// Update sumX
-				sumY += child.height;
+				sumY += child.height + elementSpacing;
 			} else {
 				// Count child to new row
 				j++;
 				columns[j] = 1 ;
 				// Reset sum counter
-				sumY = child.height;
+				sumY = child.height + elementSpacing;
 			}
 		}
 		
@@ -98,7 +103,7 @@ class VerticalLayout implements ILayout
 	{
 		var contentHeight : Float = 0;
 		for (i in startIndex...(startIndex + childCount)) {
-			contentHeight += container.getChildAt(i).height;
+			contentHeight += container.getChildAt(i).height + elementSpacing;
 		}
 		
 		return (container.containerHeight - container.containerPaddingY) / 2.0 - contentHeight / 2.0;

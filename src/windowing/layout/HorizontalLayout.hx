@@ -8,7 +8,12 @@ import openfl.display.Sprite;
  */
 class HorizontalLayout implements ILayout
 {
-	public function new() { }
+	var elementSpacing : Float;
+	
+	public function new(spacing : Float = 5) 
+	{ 
+		elementSpacing = spacing;
+	}
 	
 	public function getId():String { return "HORIZONTAL"; }
 	
@@ -43,7 +48,7 @@ class HorizontalLayout implements ILayout
 				var nextChild = container.getChildAt(i + 1);
 				if (i + 1 < rowChildCount[rowIndex] + rowStartIndex) {
 					// Set offsets
-					offsetX += nextChild.width;
+					offsetX += nextChild.width + elementSpacing;
 					
 					// Update max height
 					if (child.height > maxChildHeight) {
@@ -77,16 +82,16 @@ class HorizontalLayout implements ILayout
 		for (i in 0...container.numChildren) {
 			var child = container.getChildAt(i);
 			// Count child to current row if row is empty or container has enough space
-			if (sumX == 0 || sumX + child.width < container.containerWidth - 2 * container.containerPaddingX) {
+			if (sumX == 0 || sumX + child.width + elementSpacing < container.containerWidth - 2 * container.containerPaddingX) {
 				rows[j]++;
 				// Update sumX
-				sumX += child.width;
+				sumX += child.width + elementSpacing;
 			} else {
 				// Count child to new row
 				j++;
 				rows[j] = 1 ;
 				// Reset sum counter
-				sumX = child.width;
+				sumX = child.width + elementSpacing;
 			}
 		}
 		
@@ -98,7 +103,7 @@ class HorizontalLayout implements ILayout
 	{
 		var contentWidth : Float = 0;
 		for (i in startIndex...(startIndex + childCount)) {
-			contentWidth += container.getChildAt(i).width;
+			contentWidth += container.getChildAt(i).width + elementSpacing;
 		}
 		
 		return (container.containerWidth - container.containerPaddingX) / 2.0 - contentWidth / 2.0;
