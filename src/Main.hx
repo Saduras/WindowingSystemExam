@@ -142,8 +142,9 @@ class Main extends Sprite
 		for (i in 0...10) 
 		{
 			var btn : Button = new Button("Button " + i, 50.0, 20.0);
+			// Place button at random coordinates inside the window
 			btn.x = Math.random() * (window.windowWidth - btn.buttonWidth);
-			btn.y = Math.random() * (window.windowHeight - btn.buttonHeight);
+			btn.y = Math.random() * (window.windowHeight - btn.buttonHeight - window.titleBar.titlebarHeight);
 			btn.draw();
 			window.content.addChild(btn);
 		}
