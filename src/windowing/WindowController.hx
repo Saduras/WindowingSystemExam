@@ -39,15 +39,20 @@ class WindowController
 	//{ Titlebar event handler
 	
 	// Start drag if mouse is hold on the title bar.
+	// Don't drag if window is minimzed.
 	private function onTitleBarMouseDown(e : Event) : Void 
 	{
-		windowView.startDrag();
+		if (!windowView.isMinimized) {
+			windowView.startDrag();
+		}
 	}
 	
 	// Drop window at current mouse position.
 	private function onTitleBarMouseUp(e : Event) : Void 
 	{
-		windowView.stopDrag();
+		if (!windowView.isMinimized) {
+			windowView.stopDrag();
+		}
 	}
 	//}
 	

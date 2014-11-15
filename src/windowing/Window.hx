@@ -36,7 +36,7 @@ class Window extends Sprite
 	var controller : WindowController;
 	
 	// Flag if the winow is currenlty minimized
-	var isMinimized : Bool = false;
+	public var isMinimized(default, null) : Bool = false;
 	//}
 
 	public function new(title : String, width : Float, height : Float, layout : ILayout) 
