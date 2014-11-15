@@ -31,11 +31,11 @@ class Button extends Sprite
 	public var label : TextField;
 	
 	// Width of the button
-	var buttonWidth : Float;
+	public var buttonWidth : Float;
 	// Height of the button
-	var buttonHeight : Float;
+	public var buttonHeight : Float;
 	// Thickness of the button border
-	var borderSize : Int = 1;
+	public var borderSize : Int = 1;
 	
 	// Current state of the button
 	var buttonState : ButtonState = ButtonState.DEFAULT;

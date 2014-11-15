@@ -29,9 +29,12 @@ class Window extends Sprite
 	public var titleBar : TitleBar;
 	// Window content
 	public var content : ContainerWithLayout;
+	// Resize handle
+	public var resizeHandle : WindowResizeHandle;
 	// Controller who handles event logic
 	var controller : WindowController;
 	
+	// Flag if the winow is currenlty minimized
 	var isMinimized : Bool = false;
 	//}
 
@@ -52,6 +55,10 @@ class Window extends Sprite
 		content.x = 0;
 		content.y = titleBar.titlebarHeight;
 		this.addChild(content);
+		
+		// Create resize handle
+		resizeHandle = new WindowResizeHandle();
+		this.addChild(resizeHandle);
 		
 		// Setup controller
 		controller = new WindowController(this);
@@ -79,7 +86,15 @@ class Window extends Sprite
 			graphics.endFill();
 		}
 		
-		titleBar.Draw();
+		// Draw title bar
+		titleBar.titleBarWidth = windowWidth;
+		titleBar.draw();
+		
+		// Draw resize handle
+		resizeHandle.draw();
+		// Place the handle in the bottom right corner
+		resizeHandle.x = windowWidth - resizeHandle.handleSize;
+		resizeHandle.y = windowHeight - resizeHandle.handleSize;
 	}
 	
 	// Bring window to the front and highlight it as active.

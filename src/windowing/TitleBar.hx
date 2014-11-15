@@ -22,12 +22,12 @@ class TitleBar extends Sprite
 	public static var inactiveColor : Int = 0x333366;
 	
 	public var isActive : Bool = false;
-	
 
 	public function new(titleText : String, width : Float, height: Float) 
 	{
 		super();
 		
+		// Assign width & height
 		titleBarWidth = width;
 		titlebarHeight = height;
 		
@@ -42,21 +42,15 @@ class TitleBar extends Sprite
 		// Add close button
 		var buttonSize : Float = titlebarHeight - 2;
 		closeButton = new Button("x", buttonSize, buttonSize);
-		closeButton.y = 1;
-		closeButton.x = titleBarWidth - buttonSize; // Place the button on the right end of the title bar
-		//closeButton.draw();
 		this.addChild(closeButton);
 		
 		// Add minimize button
 		minimizeButton = new Button("_", buttonSize, buttonSize);
-		minimizeButton.y = 1;
-		minimizeButton.x = closeButton.x - buttonSize - 2; // Place minimize next left to close button
-		//minimizeButton.draw();
 		this.addChild(minimizeButton);
 	}
 	
-	
-	public function Draw() : Void
+	// Draw rectangual background for the titlebar and buttons.
+	public function draw() : Void
 	{
 		graphics.clear();
 		if (isActive) {
@@ -70,5 +64,12 @@ class TitleBar extends Sprite
 		// Draw buttons of this title bar
 		closeButton.draw();
 		minimizeButton.draw();
+		
+		// Place the button on the right end of the title bar
+		closeButton.y = 1;
+		closeButton.x = titleBarWidth - closeButton.buttonWidth; 
+		// Place minimize next left to close button
+		minimizeButton.y = 1;
+		minimizeButton.x = closeButton.x - minimizeButton.buttonWidth - 2; 
 	}
 }

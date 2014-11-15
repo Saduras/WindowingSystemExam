@@ -3,10 +3,10 @@
 	<!-- NMML reference: https://gist.github.com/1763850 -->
 	
 	<!-- metadata, make sure 'package' is at least 3 segments (ie. com.mycompany.myproject) -->
-	<meta title="Windowing System" package="windowing" version="1.0.0" company="David" />
+	<meta title="WindowingSystem" package="windowing" version="1.0.0" company="David" />
 	
 	<!-- output -->
-	<app main="Main" file="Windowing System" path="bin" />
+	<app main="Main" file="WindowingSystem" path="bin" />
 	
 	<window background="#ffffff" fps="60" />
 	<window width="800" height="480" unless="mobile" />
