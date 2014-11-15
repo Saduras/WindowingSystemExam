@@ -6,21 +6,26 @@ import openfl.text.TextField;
 import basicUI.Button;
 
 /**
- * ...
+ * Core window component view. Consists of title label,
+ * minimze button and close button.
  * @author David Speck
  */
 class TitleBar extends Sprite
 {
+	// Title bar size
 	public var titleBarWidth : Float;
 	public var titlebarHeight : Float;
 	
+	// Title bar components
 	public var label : TextField;
 	public var closeButton : Button;
 	public var minimizeButton : Button;
 	
+	// Backgroundcolors for different states
 	public static var activeColor : Int = 0x9999ee;
 	public static var inactiveColor : Int = 0x333366;
 	
+	// State flag
 	public var isActive : Bool = false;
 
 	public function new(titleText : String, width : Float, height: Float) 
@@ -53,12 +58,15 @@ class TitleBar extends Sprite
 	// Draw rectangual background for the titlebar and buttons.
 	public function draw() : Void
 	{
+		// Clear old drawing
 		graphics.clear();
+		// Choose color by state
 		if (isActive) {
 			graphics.beginFill(activeColor, 1);
 		} else {
 			graphics.beginFill(inactiveColor, 1);
 		}
+		// Draw background
 		graphics.drawRect(0, 0, titleBarWidth, titlebarHeight);
 		graphics.endFill();
 		

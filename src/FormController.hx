@@ -4,12 +4,15 @@ import basicUI.InputField;
 import basicUI.OutputField;
 
 /**
- * ...
+ * Simple forme controler to test validation.
+ * Validate all input fields on submit.
  * @author David Speck
  */
 class FormController
 {
+	// Assigned list of input fields.
 	var inputFields : List<InputField>;
+	// Print validation result in output field
 	var outputField : OutputField;
 	
 	public function new() 
@@ -27,6 +30,8 @@ class FormController
 		outputField = output;
 	}
 	
+	// Validate input fields and return true on success or false else.
+	// Additional print feedback to output field
 	public function submit() : Bool
 	{
 		for (input in inputFields) {

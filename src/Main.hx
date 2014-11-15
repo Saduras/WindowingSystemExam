@@ -19,7 +19,7 @@ import basicUI.InputField;
 import openfl.Assets;
 
 /**
- * ...
+ * Main class to demonstrate windowing system.
  * @author David Speck
  */
 
@@ -115,6 +115,8 @@ class Main extends Sprite
 	//}
 
 	//{ Button handler
+	
+	// Simple window to demonstrate horizontal layout inside a window.
 	private function createHorizontalWindow(e : Event) : Void
 	{
 		var window = screen.createWindow("Window horizontal layout", new HorizontalLayout(5));
@@ -128,6 +130,7 @@ class Main extends Sprite
 		}
 	}
 	
+	// Simple window to demonstrate vertical layout inside a window.
 	private function createVerticalWindow(e : Event) : Void
 	{
 		var window = screen.createWindow("Window vertical layout", new VerticalLayout(5.0));
@@ -141,6 +144,7 @@ class Main extends Sprite
 		}
 	}
 	
+	// Create window to demostrate none layout. Place children randomly inside the window.
 	private function createNoneWindow(e : Event) : Void
 	{
 		var window = screen.createWindow("Window none layout", new NoneLayout());
@@ -157,6 +161,7 @@ class Main extends Sprite
 		}
 	}
 	
+	// Create window example with simple form with validation.
 	private function createFormWindow(e : Event) : Void
 	{
 		var window = screen.createWindow("Form window", new VerticalLayout(5.0));

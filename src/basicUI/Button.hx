@@ -82,6 +82,7 @@ class Button extends Sprite
 	// Also update label text color
 	public function draw() : Void 
 	{
+		// Choose color
 		var background, border, text : Int;
 		switch(buttonState) {
 			case ButtonState.DEFAULT:

@@ -8,7 +8,7 @@ import flash.text.TextFormatAlign;
 import openfl.Assets;
 
 /**
- * ...
+ * Simple output field. 
  * @author David
  */
 class OutputField extends Sprite

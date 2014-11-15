@@ -1,7 +1,7 @@
 package basicUI;
 
 /**
- * ...
+ * String validator for the InputField. Can validate: text, integer (number), float, color, address
  * @author David
  */
 class StringValidator

@@ -4,13 +4,15 @@ import flash.events.MouseEvent;
 import flash.events.Event;
 
 /**
- * ...
+ * Window controller. Does all the event handling for the window.
  * @author David Speck
  */
 class WindowController
 {
+	// Window view to controll
 	var windowView : Window;
 	
+	// Stored mouse postion, used for resize logic.
 	var lastMousePos : Array<Float>;
 
 	public function new(target : Window) 

@@ -12,7 +12,7 @@ import flash.text.TextFormatAlign;
 import openfl.Assets;
 
 /**
- * ...
+ * This class provides a simple labeled input field with string validation.
  * @author David
  */
 class InputField extends Sprite

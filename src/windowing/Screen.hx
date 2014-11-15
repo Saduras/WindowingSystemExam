@@ -34,10 +34,12 @@ class Screen extends Sprite
 	{
 		super();
 		
+		// Instantiate lists and map
 		windowList = new List<Window>();
 		minimizedList = new List<Window>();
 		orgPos = new Map<Window, Array<Float>>();
 		
+		// Assign width & height
 		screenWidth = width;
 		screenHeight = height;
 	}

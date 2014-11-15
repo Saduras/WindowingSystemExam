@@ -9,7 +9,9 @@ import windowing.layout.ILayout;
 import windowing.layout.VerticalLayout;
 
 /**
- * ...
+ * Window view. Represents visual state of a window object.
+ * Has title bar and content container with layout and resize handle as components.
+ * WindowController class handles events.
  * @author David Speck
  */
 class Window extends Sprite

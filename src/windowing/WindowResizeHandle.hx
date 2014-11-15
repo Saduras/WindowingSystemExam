@@ -3,14 +3,17 @@ import openfl.events.MouseEvent;
 import openfl.display.Sprite;
 
 /**
- * ...
+ * Resize handle view. Resize logic is handled by WindowController.
+ * Is core component of window.
  * @author David Speck
  */
 class WindowResizeHandle extends Sprite
 {
+	// Colors used to draw handle icon.
 	public var backgroundColor : Int = 0x666666;
 	public var lineColor : Int = 0xdddddd;
 	
+	// Size of the icon.
 	public var handleSize : Float = 16;
 
 	public function new() 
