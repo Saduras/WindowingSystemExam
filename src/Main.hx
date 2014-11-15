@@ -9,6 +9,7 @@ import flash.Lib;
 import openfl.display.Bitmap;
 import openfl.display.BitmapData;
 import openfl.events.MouseEvent;
+import openfl.text.TextField;
 import windowing.layout.NoneLayout;
 import windowing.layout.HorizontalLayout;
 import windowing.layout.VerticalLayout;
@@ -208,11 +209,20 @@ class Main extends Sprite
 		window.content.addChild(img);
 		// Scale window such that it fits the image.
 		window.setWidth(img.width + 10);
-		window.setHeight(img.height + 32);
+		window.setHeight(img.height + 62);
 		
 		// Center image
 		img.x = window.content.containerWidth / 2.0 - img.width / 2.0;
-		img.y = window.content.containerHeight / 2.0 - img.height / 2.0;
+		img.y = (window.content.containerHeight - 30) / 2.0 - img.height / 2.0;
+		
+		// Add a caption
+		var caption : TextField = new TextField();
+		caption.text = "Source: http://xkcd.com/129/";
+		caption.width = caption.textWidth * 1.05;
+		window.content.addChild(caption);
+		// Place caption centered below image
+		caption.x = window.content.containerWidth / 2.0 - caption.width / 2.0;
+		caption.y = img.y + img.height + 5;
 	}
 	//}
 }
