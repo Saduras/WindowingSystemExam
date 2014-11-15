@@ -133,14 +133,22 @@ class Window extends Sprite
 	// Reduce window to title bar and back to full view.
 	public function toggleMinimize() 
 	{
+		// Toggle minimized
 		isMinimized = !isMinimized;
+		// Re-draw window
 		draw();
 		
 		if (isMinimized) {
+			// Hide everthing but the title bar
 			content.visible = false;
+			resizeHandle.visible = false;
+			
 			dispatchEvent(new WindowEvent(WindowEvent.MINIMIZED, this));
 		} else {
+			// Show hidden components again
 			content.visible = true;
+			resizeHandle.visible = true;
+			
 			dispatchEvent(new WindowEvent(WindowEvent.SIZE_RESTORED, this));
 		}
 	}
