@@ -5,6 +5,7 @@ import windowing.events.WindowEvent;
 import windowing.layout.ContainerWithLayout;
 import windowing.layout.FreeLayout;
 import windowing.layout.HorizontalLayout;
+import windowing.layout.ILayout;
 import windowing.layout.VerticalLayout;
 
 /**
@@ -38,7 +39,7 @@ class Window extends Sprite
 	var isMinimized : Bool = false;
 	//}
 
-	public function new(title : String, width : Float, height : Float) 
+	public function new(title : String, width : Float, height : Float, layout : ILayout) 
 	{
 		super();
 		
@@ -51,7 +52,7 @@ class Window extends Sprite
 		this.addChild(titleBar);
 		
 		// Create content container
-		content = new ContainerWithLayout(new VerticalLayout());
+		content = new ContainerWithLayout(layout);
 		content.x = 0;
 		content.y = titleBar.titlebarHeight;
 		this.addChild(content);

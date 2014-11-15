@@ -30,8 +30,8 @@ class FormController
 	public function submit() : Bool
 	{
 		for (input in inputFields) {
-			if (!input.Validate()) {
-				outputField.SetText(input.GetLabel() + " is not a valid " + input.GetValidationMode(), true);
+			if (!input.validate()) {
+				outputField.SetText(input.getLabel() + " is not a valid " + input.getValidationMode(), true);
 				return false;
 			}
 		}

@@ -76,6 +76,7 @@ class Main extends Sprite
 		
 		var submitButton = new Button("Submit", 120.0, 20.0);
 		win1.content.addChild(submitButton);
+		submitButton.draw();
 		submitButton.x = 40;
 		submitButton.y = 230;
 		submitButton.addEventListener(MouseEvent.CLICK, function(e : Event) {

@@ -6,6 +6,8 @@ import openfl.display.DisplayObjectContainer;
 import openfl.display.Sprite;
 import openfl.utils.Dictionary;
 import windowing.events.WindowEvent;
+import windowing.layout.FreeLayout;
+import windowing.layout.ILayout;
 
 /**
  * The screen class is the container for the windowing system. 
@@ -41,19 +43,24 @@ class Screen extends Sprite
 	}
 
 	// Create a new window and add it to the screen.
-	public function createWindow(title : String) : Window
+	public function createWindow(title : String, layout : ILayout = null) : Window
 	{
-		var window = new Window(title, 300, 200);
+		// Use free layout by default
+		if (layout == null) layout = new FreeLayout();
+		
+		// Create window
+		var window = new Window(title, 300, 200, layout);
+		window.draw();
+		
 		// Connect events
 		window.addEventListener(WindowEvent.ACTIVATED, onWindowActivated);
 		window.addEventListener(WindowEvent.CLOSED, onWindowClosed);
 		window.addEventListener(WindowEvent.MINIMIZED, onWindowMinimized);
 		window.addEventListener(WindowEvent.SIZE_RESTORED, onWindowSizeResotred);
 		
+		// Add window to the screen
 		windowList.add(window);	
 		this.addChild(window);
-		
-		window.draw();
 		
 		return window;
 	}

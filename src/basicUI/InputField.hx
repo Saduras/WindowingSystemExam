@@ -10,7 +10,6 @@ import flash.text.TextFieldType;
 import flash.text.TextFormat;
 import flash.text.TextFormatAlign;
 import openfl.Assets;
-import basicUI.Tooltip;
 
 /**
  * ...
@@ -18,25 +17,31 @@ import basicUI.Tooltip;
  */
 class InputField extends Sprite
 {
-
+	// Input field components
 	var label 		: TextField;
 	var inputField 	: TextField;
-	var tooltip		: Tooltip;
 	
+	// Label properties
 	var labelColor 		: Int 	= 0x000000;
-	var labelWidth		: Float = 140;
+	var labelWidth		: Float = 80;
+	// Input area properties
 	var inputTextColor 	: Int = 0xffffff;
 	var inputWidth		: Float = 100;
-	var inputPadding	: Float = 5;
+	var inputPadding	: Float = 3;
 	
+	// Default colors for input area
 	var backgroundColor 			: Int = 0x0b5394;
-	var activeBackgroundColor		: Int = 0x3d85c6;
 	var borderColor 				: Int = 0x3d85c6;
+	// Highlight colors if input area has focus
+	var activeBackgroundColor		: Int = 0x3d85c6;
 	var activeBorderColor			: Int = 0x6fa8dc;
 	
+	// Background color for the current state (has focus or not)
 	var fillColor	: Int;
+	// Border color for the current state (has focus or not)
 	var lineColor	: Int;
 	
+	// Validator for the input field mode
 	var stringValidator : StringValidator;
 	
 	public function new(labelText : String, validationType : String, tooltipText : String) 
@@ -52,10 +57,10 @@ class InputField extends Sprite
 		// Define the TextFormat
 		var labelFormat : TextFormat = new TextFormat();
 		labelFormat.font = font.fontName;
-		labelFormat.size = 14.0;
+		labelFormat.size = 12.0;
 		var inputFormat : TextFormat = new TextFormat();
 		inputFormat.font = font.fontName;
-		inputFormat.size = 14.0;
+		inputFormat.size = 12.0;
 		inputFormat.align = TextFormatAlign.RIGHT;
 		
 		// Create the label TextField
@@ -83,50 +88,37 @@ class InputField extends Sprite
 		inputField.x = labelWidth + 2*inputPadding; // Move input next to the label
 		
 		// Add event listener
-		inputField.addEventListener(MouseEvent.CLICK, handleGetFocus);
-		inputField.addEventListener(FocusEvent.FOCUS_OUT, handleLoseFocus);
-		label.addEventListener(MouseEvent.MOUSE_OVER, handleMouseIn);
-		label.addEventListener(MouseEvent.MOUSE_OUT, handleMouseOut);
+		inputField.addEventListener(MouseEvent.CLICK, onGetFocus);
+		inputField.addEventListener(FocusEvent.FOCUS_OUT, onLoseFocus);
 		
 		// Initalize colors
 		fillColor = backgroundColor;
 		lineColor = borderColor;
 		
-		// add tooltip
-		tooltip = new Tooltip(tooltipText);
-		this.addChild(tooltip);
-		tooltip.x = 0;
-		tooltip.y = label.height;
-		tooltip.visible = false;
-		
-		Draw();
+		draw();
 	}
 	
-	private function handleMouseOut(e : MouseEvent) : Void
-	{
-		tooltip.visible = false;
-	}
+	//{ Event handler
 	
-	private function handleMouseIn(e : MouseEvent) : Void
-	{
-		tooltip.visible = true;
-	}
-	
-	private function handleLoseFocus(e : FocusEvent) : Void 
+	// Display input area as inactive if focus is lost.
+	private function onLoseFocus(e : FocusEvent) : Void 
 	{
 		fillColor = backgroundColor;
 		lineColor = borderColor;
-		Draw();
+		draw();
 	}
 	
-	private function handleGetFocus(e : MouseEvent) : Void 
+	// Display input area as active if focus is gained.
+	private function onGetFocus(e : MouseEvent) : Void 
 	{
 		fillColor = activeBackgroundColor;
 		lineColor = activeBorderColor;
-		Draw();
+		draw();
 	}
+	//}
 	
-	public function Draw() : Void
+	// Draw rectangle for input area.
+	public function draw() : Void
 	{
 		graphics.clear();
 		graphics.lineStyle(2.0, lineColor);
@@ -135,12 +127,16 @@ class InputField extends Sprite
 		graphics.endFill();
 	}
 	
-	public function Validate() : Bool
+	// Check if current string in textfield is valid
+	// for the set validation mode.
+	public function validate() : Bool
 	{
 		return stringValidator.checkText(inputField.text);
 	}
 	
-	public function GetValue() : Dynamic
+	// Return value of the input field with correct type
+	// for the validation mode.
+	public function getValue() : Dynamic
 	{
 		if (stringValidator.modus == "text")
 		{
@@ -161,7 +157,9 @@ class InputField extends Sprite
 		return null;
 	}
 	
-	public function SetValue(value:Dynamic) : Void
+	// Set string in input field.
+	// Convert color value to hex format for colors.
+	public function setValue(value : Dynamic) : Void
 	{
 		if (stringValidator.modus == "color")
 		{
@@ -171,12 +169,14 @@ class InputField extends Sprite
 		}
 	}
 	
-	public function GetLabel() : String
+	// Get label of the input field.
+	public function getLabel() : String
 	{
 		return label.text;
 	}
 	
-	public function GetValidationMode() : String
+	// Get current validation mode.
+	public function getValidationMode() : String
 	{
 		return stringValidator.modus;
 	}
