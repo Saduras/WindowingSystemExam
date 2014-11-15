@@ -15,7 +15,7 @@ class HorizontalLayout implements ILayout
 	// Apply layout by arraning containers children accordently.
 	public function apply(container : ContainerWithLayout) : Void 
 	{
-		// Count of child fitting in one row
+		// Count of child fitting in each row
 		var rowChildCount : Array<Int> = calculateRowDistribution(container);
 		
 		// Max height for childs in one row
@@ -77,7 +77,7 @@ class HorizontalLayout implements ILayout
 		for (i in 0...container.numChildren) {
 			var child = container.getChildAt(i);
 			// Count child to current row if row is empty or container has enough space
-			if (sumX == 0 || sumX + child.width < container.containerWidth) {
+			if (sumX == 0 || sumX + child.width < container.containerWidth - 2 * container.containerPaddingX) {
 				rows[j]++;
 				// Update sumX
 				sumX += child.width;
@@ -86,7 +86,7 @@ class HorizontalLayout implements ILayout
 				j++;
 				rows[j] = 1 ;
 				// Reset sum counter
-				sumX = 0;
+				sumX = child.width;
 			}
 		}
 		
