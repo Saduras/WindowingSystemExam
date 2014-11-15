@@ -9,5 +9,5 @@ interface ILayout
 {
   public function getId() : String;
   
-  public function apply(container : Sprite) : Void;
+  public function apply(container : ContainerWithLayout) : Void;
 }
