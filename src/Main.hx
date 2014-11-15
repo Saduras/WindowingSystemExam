@@ -158,41 +158,36 @@ class Main extends Sprite
 	
 	private function createFormWindow(e : Event) : Void
 	{
-		var window = screen.createWindow("Form window");
+		var window = screen.createWindow("Form window", new VerticalLayout());
 		
 		window.moveTo(40, 40);
 		
 		// Add a simple form to window one
 		var formController = new FormController();
-		var addressInput = new InputField("Address:", "address", "Physical address of the person.");
-		window.content.addChild(addressInput);
-		addressInput.x = 20;
-		addressInput.y = 30;
-		formController.addInputField(addressInput);
 		
-		var ageInput = new InputField("Age:", "number", "Age of the person in years");
-		window.content.addChild(ageInput);
-		ageInput.x = 30;
-		ageInput.y = 80;
-		formController.addInputField(ageInput);
-		
-		var nameInput = new InputField("Name:", "text", "Name of the person.");
+		var nameInput = new InputField("Name:", "text");
 		window.content.addChild(nameInput);
-		nameInput.x = 35;
-		nameInput.y = 130;
 		formController.addInputField(nameInput);
 		
-		var output = new OutputField(300.0, 400.0, 30.0);
+		var addressInput = new InputField("Address:", "address");
+		window.content.addChild(addressInput);
+		formController.addInputField(addressInput);
+		
+		var ageInput = new InputField("Age:", "number");
+		window.content.addChild(ageInput);
+		formController.addInputField(ageInput);
+		
+		var heightInput = new InputField("Height:", "float");
+		window.content.addChild(heightInput);
+		formController.addInputField(heightInput);
+		
+		var output = new OutputField(250.0, 260.0, 22.0);
 		window.content.addChild(output);
-		output.x = 20;
-		output.y = 180;
 		formController.setOutputField(output);
 		
 		var submitButton = new Button("Submit", 120.0, 20.0);
 		window.content.addChild(submitButton);
 		submitButton.draw();
-		submitButton.x = 40;
-		submitButton.y = 230;
 		submitButton.addEventListener(MouseEvent.CLICK, function(e : Event) {
 			formController.submit();
 		});

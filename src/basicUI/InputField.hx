@@ -44,7 +44,7 @@ class InputField extends Sprite
 	// Validator for the input field mode
 	var stringValidator : StringValidator;
 	
-	public function new(labelText : String, validationType : String, tooltipText : String) 
+	public function new(labelText : String, validationType : String) 
 	{
 		super();
 		
