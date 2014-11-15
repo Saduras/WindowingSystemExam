@@ -21,7 +21,7 @@ class ContainerWithLayout extends Sprite
 	public var containerPaddingX : Float = 5;
 	public var containerPaddingY : Float = 5;
 
-	public function new(layout : ILayout, width : Float, heigth : Float) 
+	public function new(layout : ILayout, width : Float, height : Float) 
 	{
 		super();
 		
