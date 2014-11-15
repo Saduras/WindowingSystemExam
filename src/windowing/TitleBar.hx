@@ -35,6 +35,7 @@ class TitleBar extends Sprite
 		label = new TextField();
 		label.text = titleText;
 		label.selectable = false;
+		label.mouseEnabled = false;
 		label.textColor = 0xffffff;
 		label.height = titlebarHeight;
 		this.addChild(label);

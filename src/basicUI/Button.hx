@@ -55,6 +55,7 @@ class Button extends Sprite
 		// Create label
 		label = new TextField();
 		label.selectable = false;
+		label.mouseEnabled = false;
 		label.text = text;
 		label.width = buttonWidth * 1.05;
 		label.height = buttonHeight * 1.05;
