@@ -88,19 +88,27 @@ class Screen extends Sprite
 	// Remove closed window.
 	private function onWindowClosed(e : Event) : Void
 	{
-		var we : WindowEvent = cast(e, WindowEvent);
+		var window : Window = cast(e, WindowEvent).source;
 		
-		if (activeWindow == we.source) {
+		if (activeWindow == window) {
 			activeWindow = null;
 		}
 		
-		windowList.remove(we.source);
+		windowList.remove(window);
 		
 		// Remove event listener on closed window
-		we.source.removeEventListener(WindowEvent.ACTIVATED, onWindowActivated);
-		we.source.removeEventListener(WindowEvent.CLOSED, onWindowClosed);
-		we.source.removeEventListener(WindowEvent.MINIMIZED, onWindowMinimized);
-		we.source.removeEventListener(WindowEvent.SIZE_RESTORED, onWindowSizeResotred);
+		window.removeEventListener(WindowEvent.ACTIVATED, onWindowActivated);
+		window.removeEventListener(WindowEvent.CLOSED, onWindowClosed);
+		window.removeEventListener(WindowEvent.MINIMIZED, onWindowMinimized);
+		window.removeEventListener(WindowEvent.SIZE_RESTORED, onWindowSizeResotred);
+		
+		// Clean up minimized list
+		if (window.isMinimized) {
+			minimizedList.remove(window);
+			orgPos.remove(window);
+			
+			arrangeMinimizedWindows();
+		}
 	}
 	
 	// Add window to minimized list and save orginal position.
