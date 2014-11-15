@@ -3,7 +3,7 @@ package windowing;
 import openfl.display.Sprite;
 import windowing.events.WindowEvent;
 import windowing.layout.ContainerWithLayout;
-import windowing.layout.FreeLayout;
+import windowing.layout.NoneLayout;
 import windowing.layout.HorizontalLayout;
 import windowing.layout.ILayout;
 import windowing.layout.VerticalLayout;
@@ -158,6 +158,8 @@ class Window extends Sprite
 	{
 		windowWidth = width;
 		content.containerWidth = windowWidth;
+		
+		draw();
 	}
 	
 	// Set window height
@@ -165,5 +167,7 @@ class Window extends Sprite
 	{
 		windowHeight = height;
 		content.containerHeight = windowHeight - titleBar.titlebarHeight;
+		
+		draw();
 	}
 }

@@ -6,11 +6,11 @@ import openfl.display.Sprite;
  * I.e. it's equivalent to not using a layout at all.
  * @author David Speck
  */
-class FreeLayout implements ILayout
+class NoneLayout implements ILayout
 {
 	public function new() { }
 	
-	public function getId() : String { return "FREE"; }
+	public function getId() : String { return "NONE"; }
 	
 	public function apply(container : Sprite) : Void 
 	{

@@ -6,7 +6,7 @@ import openfl.display.DisplayObjectContainer;
 import openfl.display.Sprite;
 import openfl.utils.Dictionary;
 import windowing.events.WindowEvent;
-import windowing.layout.FreeLayout;
+import windowing.layout.NoneLayout;
 import windowing.layout.ILayout;
 
 /**
@@ -26,9 +26,9 @@ class Screen extends Sprite
 	var orgPos : Map<Window, Array<Float>>;
 	
 	// Width of the screen
-	var screenWidth : Float;
+	public var screenWidth : Float;
 	// Height of the screen
-	var screenHeight : Float;
+	public var screenHeight : Float;
 
 	public function new(width : Float, height : Float) 
 	{
@@ -46,7 +46,7 @@ class Screen extends Sprite
 	public function createWindow(title : String, layout : ILayout = null) : Window
 	{
 		// Use free layout by default
-		if (layout == null) layout = new FreeLayout();
+		if (layout == null) layout = new NoneLayout();
 		
 		// Create window
 		var window = new Window(title, 300, 200, layout);
@@ -144,7 +144,7 @@ class Screen extends Sprite
 	//{ Helper
 	
 	// Arrange minimized windows horizontal at the bottom of the screen.
-	private function arrangeMinimizedWindows() : Void
+	public function arrangeMinimizedWindows() : Void
 	{
 		var offsetX : Float = 0;
 		for (win in minimizedList) 

@@ -6,13 +6,16 @@ import flash.display.DisplayObjectContainer;
 import flash.display.Sprite;
 import flash.events.Event;
 import flash.Lib;
+import openfl.display.Bitmap;
+import openfl.display.BitmapData;
 import openfl.events.MouseEvent;
-import windowing.layout.FreeLayout;
+import windowing.layout.NoneLayout;
 import windowing.layout.HorizontalLayout;
 import windowing.layout.VerticalLayout;
 import windowing.Window;
 import windowing.Screen;
 import basicUI.InputField;
+import openfl.Assets;
 
 /**
  * ...
@@ -28,8 +31,13 @@ class Main extends Sprite
 	
 	function resize(e) 
 	{
-		if (!inited) init();
-		// else (resize or orientation change)
+		if (!inited) {
+			init();
+		}
+		else {
+			screen.
+		}
+		
 	}
 	
 	function init() 
@@ -59,13 +67,17 @@ class Main extends Sprite
 		verticalWindowButton.addEventListener(MouseEvent.CLICK, createVerticalWindow);
 		buttons.add(verticalWindowButton);
 		
-		var freeWindowButton = new Button("Create window with free layout", 200.0, 20.0);
-		freeWindowButton.addEventListener(MouseEvent.CLICK, createFreeWindow);
-		buttons.add(freeWindowButton);
+		var noneWindowButton = new Button("Create window with none layout", 200.0, 20.0);
+		noneWindowButton.addEventListener(MouseEvent.CLICK, createNoneWindow);
+		buttons.add(noneWindowButton);
 		
 		var formWindowButton = new Button("Create window with form", 200.0, 20.0);
 		formWindowButton.addEventListener(MouseEvent.CLICK, createFormWindow);
 		buttons.add(formWindowButton);
+		
+		var imageWindowButton = new Button("Create window with image", 200.0, 20.0);
+		imageWindowButton.addEventListener(MouseEvent.CLICK, createImageWindow);
+		buttons.add(imageWindowButton);
 		
 		// Add buttons to stage, arrange and draw them
 		var offsetY : Float = 5;
@@ -134,9 +146,9 @@ class Main extends Sprite
 		}
 	}
 	
-	private function createFreeWindow(e : Event) : Void
+	private function createNoneWindow(e : Event) : Void
 	{
-		var window = screen.createWindow("Window free layout", new FreeLayout());
+		var window = screen.createWindow("Window none layout", new NoneLayout());
 		window.moveTo(100.0, 100.0);
 		
 		for (i in 0...10) 
@@ -190,6 +202,28 @@ class Main extends Sprite
 		submitButton.addEventListener(MouseEvent.CLICK, function(e : Event) {
 			formController.submit();
 		});
+	}
+	
+	// Create a example window with a image inside
+	private function createImageWindow(e : MouseEvent) : Void 
+	{
+		// Create window
+		var window = screen.createWindow("Window none layout", new NoneLayout());
+		window.moveTo(200.0, 200.0);
+		
+		// Load image from assets
+		var bitmapData : BitmapData = Assets.getBitmapData("img/content_protection.png");
+		var img : Bitmap = new Bitmap(bitmapData);
+		
+		// Add image to window content
+		window.content.addChild(img);
+		// Scale window such that it fits the image.
+		window.setWidth(img.width + 10);
+		window.setHeight(img.height + 32);
+		
+		// Center image
+		img.x = window.content.containerWidth / 2.0 - img.width / 2.0;
+		img.y = window.content.containerHeight / 2.0 - img.height / 2.0;
 	}
 	//}
 }
