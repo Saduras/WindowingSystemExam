@@ -164,7 +164,7 @@ class Main extends Sprite
 	// Create window example with simple form with validation.
 	private function createFormWindow(e : Event) : Void
 	{
-		var window = screen.createWindow("Form window", new VerticalLayout(5.0));
+		var window = screen.createWindow("Form window", new VerticalLayout(5.0), 300, 300);
 		
 		window.moveTo(40, 40);
 		

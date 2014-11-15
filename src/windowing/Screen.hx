@@ -45,13 +45,13 @@ class Screen extends Sprite
 	}
 
 	// Create a new window and add it to the screen.
-	public function createWindow(title : String, layout : ILayout = null) : Window
+	public function createWindow(title : String, layout : ILayout = null, width : Float = 300, height : Float = 200) : Window
 	{
 		// Use free layout by default
 		if (layout == null) layout = new NoneLayout();
 		
 		// Create window
-		var window = new Window(title, 300, 200, layout);
+		var window = new Window(title, width, height, layout);
 		window.draw();
 		
 		// Connect events
