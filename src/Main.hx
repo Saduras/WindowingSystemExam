@@ -34,10 +34,12 @@ class Main extends Sprite
 		if (!inited) {
 			init();
 		}
-		else {
-			screen.
+		else if (screen != null) {			
+			// Scale screen instance
+			screen.screenWidth = stage.stageWidth;
+			screen.screenHeight = stage.stageHeight;
+			screen.arrangeMinimizedWindows();
 		}
-		
 	}
 	
 	function init() 
