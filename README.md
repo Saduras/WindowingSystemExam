@@ -15,4 +15,4 @@ Those features where required by the tasks of the exam.
 - minimize to bottom of the screen
 - form demo
 - support layouts: free, horizontal, vertical
-- windows are resizeable
+- windows are resizable
